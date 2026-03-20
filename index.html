@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YOU BUT NOT YOU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- glitch font vibe -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- BACKGROUND LAYERS -->
+  <div id="noiseLayer"></div>
+  <div id="scanlines"></div>
+  <div id="vignette"></div>
+
+  <!-- SYSTEM STATUS -->
+  <div id="systemBar">
+    <span>SYSTEM : ACTIVE</span>
+    <span id="time"></span>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+
+    <h1 class="glitch" data-text="YOU BUT NOT YOU">YOU BUT NOT YOU</h1>
+    <p class="sub">This system is observing you.</p>
+
+    <!-- INPUT AREA -->
+    <div class="input-section">
+      <textarea id="userInput" placeholder="Start typing..."></textarea>
+      <div class="typing-status">
+        <span id="typingState">IDLE</span>
+      </div>
+    </div>
+
+    <!-- MIRROR OUTPUT -->
+    <div id="mirrorBox">
+      <p id="mirrorText"></p>
+    </div>
+
+    <!-- HIDDEN SECOND LAYER -->
+    <div id="shadowBox">
+      <p id="shadowText"></p>
+    </div>
+
+    <!-- AI STATUS -->
+    <div class="ai-panel">
+      <p>Pattern Recognition: <span id="pattern">0%</span></p>
+      <p>Behavior Analysis: <span id="behavior">Scanning...</span></p>
+      <p>Prediction Engine: <span id="prediction">Standby</span></p>
+    </div>
+
+  </div>
+
+  <!-- GHOST CURSOR -->
+  <div id="ghostCursor"></div>
+
+  <!-- RANDOM WHISPERS -->
+  <div id="whisper"></div>
+
+  <!-- AUDIO (optional creepy ambience) -->
+  <audio id="bgSound" loop>
+    <source src="ambient.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+
+  <!-- INLINE SYSTEM SCRIPT -->
+  <script>
+
+    // CLOCK
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("time").innerText =
+        now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+    }
+    setInterval(updateClock, 1000);
+
+    // RANDOM WHISPERS
+    const whispers = [
+      "you've been here before.",
+      "this is not your first time.",
+      "why are you hesitating?",
+      "you think this is random?",
+      "look closer.",
+      "it learns you."
+    ];
+
+    setInterval(() => {
+      const w = document.getElementById("whisper");
+      w.innerText = whispers[Math.floor(Math.random() * whispers.length)];
+      w.style.opacity = 1;
+
+      setTimeout(() => {
+        w.style.opacity = 0;
+      }, 2000);
+    }, 7000);
+
+    // FAKE AI PROGRESS
+    let progress = 0;
+    setInterval(() => {
+      progress += Math.random() * 5;
+      if (progress > 100) progress = 100;
+
+      document.getElementById("pattern").innerText = Math.floor(progress) + "%";
+
+      if (progress > 60) {
+        document.getElementById("prediction").innerText = "ACTIVE";
+      }
+      if (progress > 85) {
+        document.getElementById("behavior").innerText = "Profile Complete";
+      }
+
+    }, 2000);
+
+  </script>
+
+  <!-- EXTRA HIDDEN LAYERS FOR DEPTH -->
+  <div style="display:none">
+    <p>you are not alone here</p>
+    <p>it is watching your behavior</p>
+    <p>patterns detected</p>
+    <p>prediction model evolving</p>
+    <p>identity mismatch</p>
+    <p>duplicate instance found</p>
+    <p>syncing consciousness...</p>
+  </div>
+
+<div id="credit">Agus Satria Adhitama</div>
+
+</body>
+</html>

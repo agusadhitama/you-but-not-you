@@ -1,0 +1,265 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BASE */
+body {
+  font-family: 'Share Tech Mono', monospace;
+  background: #050505;
+  color: #eaeaea;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* BACKGROUND EFFECTS */
+
+/* NOISE */
+#noiseLayer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity: 0.08;
+  z-index: 1;
+}
+
+/* SCANLINES */
+#scanlines {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.03) 0px,
+    rgba(255,255,255,0.03) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  z-index: 2;
+}
+
+/* VIGNETTE */
+#vignette {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 200px rgba(0,0,0,0.9);
+  z-index: 3;
+}
+
+/* SYSTEM BAR */
+#systemBar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  color: #777;
+  z-index: 5;
+}
+
+/* MAIN */
+.container {
+  position: relative;
+  z-index: 10;
+  width: 700px;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* GLITCH TITLE */
+.glitch {
+  font-size: 40px;
+  position: relative;
+  color: white;
+  letter-spacing: 2px;
+  animation: flicker 2s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.glitch::before {
+  color: #ff004c;
+  z-index: -1;
+  animation: glitchTop 2s infinite;
+}
+
+.glitch::after {
+  color: #00fff9;
+  z-index: -2;
+  animation: glitchBottom 2s infinite;
+}
+
+@keyframes glitchTop {
+  0% { clip-path: inset(0 0 80% 0); transform: translate(-2px, -2px); }
+  50% { clip-path: inset(10% 0 60% 0); transform: translate(2px, 2px); }
+  100% { clip-path: inset(0 0 80% 0); transform: translate(-2px, -2px); }
+}
+
+@keyframes glitchBottom {
+  0% { clip-path: inset(60% 0 0 0); transform: translate(2px, 2px); }
+  50% { clip-path: inset(40% 0 10% 0); transform: translate(-2px, -2px); }
+  100% { clip-path: inset(60% 0 0 0); transform: translate(2px, 2px); }
+}
+
+@keyframes flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    opacity: 1;
+  }
+  20%, 24%, 55% {
+    opacity: 0.4;
+  }
+}
+
+/* SUBTEXT */
+.sub {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* INPUT */
+textarea {
+  width: 100%;
+  height: 120px;
+  background: #0a0a0a;
+  border: 1px solid #222;
+  color: #eaeaea;
+  padding: 12px;
+  resize: none;
+  outline: none;
+  transition: 0.3s;
+}
+
+textarea:focus {
+  border-color: #00ff9c;
+  box-shadow: 0 0 10px rgba(0,255,156,0.2);
+}
+
+/* TYPING STATUS */
+.typing-status {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* MIRROR BOX */
+#mirrorBox {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #111;
+  background: #030303;
+  min-height: 80px;
+}
+
+#mirrorText {
+  color: #9effa1;
+  opacity: 0.85;
+}
+
+/* SHADOW TEXT (layer kedua) */
+#shadowBox {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px dashed #111;
+  opacity: 0.3;
+  filter: blur(1px);
+  color: #ff004c;
+}
+
+/* AI PANEL */
+.ai-panel {
+  margin-top: 20px;
+  font-size: 12px;
+  color: #888;
+  border-top: 1px solid #111;
+  padding-top: 10px;
+}
+
+.ai-panel span {
+  color: #00ff9c;
+}
+
+/* GHOST CURSOR */
+#ghostCursor {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: #00ff9c;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.6;
+  z-index: 100;
+}
+
+/* WHISPER TEXT */
+#whisper {
+  position: fixed;
+  bottom: 30px;
+  width: 100%;
+  text-align: center;
+  color: #777;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 1s;
+  z-index: 20;
+}
+
+/* SCARY HOVER EFFECT */
+textarea:hover {
+  background: #080808;
+}
+
+/* SCROLLBAR */
+textarea::-webkit-scrollbar {
+  width: 5px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: #222;
+}
+
+/* RANDOM FLICKER GLOBAL */
+body::after {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.02);
+  opacity: 0;
+  pointer-events: none;
+  animation: screenFlicker 6s infinite;
+}
+
+@keyframes screenFlicker {
+  0%, 95%, 100% { opacity: 0; }
+  96% { opacity: 0.2; }
+  97% { opacity: 0; }
+  98% { opacity: 0.15; }
+  99% { opacity: 0; }
+}
+
+/* CREDIT */
+#credit {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  opacity: 0;
+  transition: opacity 1s;
+}
